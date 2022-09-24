@@ -7,7 +7,7 @@ const Navbar = (props) => {
 
         <NavbarJsx bg="dark" variant="dark">
             <Container>
-                <NavbarJsx.Brand href="#home">OnePiece Streaming</NavbarJsx.Brand>
+                <NavbarJsx.Brand>OnePiece Streaming</NavbarJsx.Brand>
                 <Nav className="me-auto">
                     <Nav.Link onClick={() => props.setShowEpisode(false)}>Home</Nav.Link>
                 </Nav>

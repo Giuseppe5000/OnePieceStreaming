@@ -50,6 +50,7 @@ const App = () => {
           <h1 className="text-center mt-5">Episode List</h1>
         </>
       }
+
       {!showEpisode &&
         <Container className="text-center" >
           <Row className='mt-5'>
@@ -67,7 +68,13 @@ const App = () => {
       }
 
       {showEpisode &&
-        <Episode epNum={showEpisode}></Episode>
+        <>
+          <Episode epNum={showEpisode}></Episode>
+          <Container className="text-center my-5">
+          <Button variant="dark" onClick={() => setShowEpisode(false)}>Return to list</Button>
+          </Container>
+
+        </>
       }
 
     </>
