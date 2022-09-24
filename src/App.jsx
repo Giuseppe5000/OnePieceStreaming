@@ -1,4 +1,5 @@
 import NavbarJsx from './components/Navbar';
+import Episode from './components/Episode';
 import { useEffect, useState } from "react";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
@@ -23,7 +24,7 @@ const App = () => {
     for (let i = 1; i <= episodeNum; i++) {
       content.push(
         <Col className="my-4">
-          <Button variant="dark">{i}</Button>
+          <Button variant="dark" onClick={() => setShowEpisode(i)}> {i} </Button>
         </Col>
       );
     }
@@ -36,13 +37,20 @@ const App = () => {
 
   return (
     <>
-      <NavbarJsx></NavbarJsx>
+      <NavbarJsx setShowEpisode={setShowEpisode}></NavbarJsx>
       <Image></Image>
-      <Container className="text-center">
-        <Row className='mt-5'>
-          {episodeNum && renderButtonLinks()}
-        </Row>
-      </Container>
+      <h1 className="text-center">Episode List</h1>
+      {!showEpisode &&
+        <Container className="text-center">
+          <Row className='mt-5'>
+            {episodeNum && renderButtonLinks()}
+          </Row>
+        </Container>
+      }
+
+      {showEpisode &&
+        <Episode epNum={showEpisode}></Episode>
+      }
 
     </>
   );
