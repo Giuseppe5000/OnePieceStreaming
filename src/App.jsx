@@ -42,38 +42,32 @@ const App = () => {
     <>
       <NavbarJsx setShowEpisode={setShowEpisode}></NavbarJsx>
 
-
-
       {!showEpisode &&
         <>
           <Image src={image} fluid />
           <h1 className="text-center mt-5">Episode List</h1>
+
+          <Container className="text-center" >
+            <Row className='mt-5'>
+              {episodeNum && renderButtonLinks()}
+            </Row>
+
+            <button className="scrollButton"
+              onClick={() => {
+                containerList.current.scrollIntoView({ behavior: "smooth" });
+              }}
+            >▼</button>
+            <span ref={containerList}></span>
+          </Container>
         </>
-      }
-
-      {!showEpisode &&
-        <Container className="text-center" >
-          <Row className='mt-5'>
-            {episodeNum && renderButtonLinks()}
-          </Row>
-
-          <button className="scrollButton "
-            onClick={() => {
-              containerList.current.scrollIntoView({ behavior: "smooth" });
-            }}
-          >▼</button>
-          <span ref={containerList}></span>
-        </Container>
-
       }
 
       {showEpisode &&
         <>
           <Episode epNum={showEpisode}></Episode>
           <Container className="text-center my-5">
-          <Button variant="dark" onClick={() => setShowEpisode(false)}>Return to list</Button>
+            <Button variant="dark" onClick={() => setShowEpisode(false)}>Return to list</Button>
           </Container>
-
         </>
       }
 
