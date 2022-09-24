@@ -56,11 +56,11 @@ const App = () => {
             {episodeNum && renderButtonLinks()}
           </Row>
 
-          <Button className="scrollButton" variant="dark"
+          <button className="scrollButton "
             onClick={() => {
               containerList.current.scrollIntoView({ behavior: "smooth" });
             }}
-          >▼</Button>
+          >▼</button>
           <span ref={containerList}></span>
         </Container>
 

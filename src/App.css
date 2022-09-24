@@ -6,7 +6,7 @@
     border: none;
     height: 35px;
     width: 35px;
-    border-radius: 50%;
+    border-radius: 100%;
     cursor: pointer;
     outline: 0;
     animation-iteration-count: 1;
@@ -14,6 +14,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color:white;
+    background-color: black;
 }
 
 
