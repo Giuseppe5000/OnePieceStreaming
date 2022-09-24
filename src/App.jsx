@@ -1,8 +1,13 @@
 import './App.css';
+import NavbarJsx from './components/Navbar';
 
 const App = () => {
   return (
-    <h1>OnePieceStreaming</h1>
+    <>
+      <NavbarJsx></NavbarJsx>
+      <div className="text-center">Image</div>
+      <div className="text-center">Episodes list button</div>
+    </>
   );
 }
 
