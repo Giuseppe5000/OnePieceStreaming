@@ -18,10 +18,10 @@ const Episode = (props) => {
 
     return (
         <Container>
-            <h1 className="text-center mb-5">Episode {props.epNum}</h1>
+            <h1 className="text-center mb-5 mt-3">Episode {props.epNum}</h1>
             {episodeLink &&
-                <div class="embed-responsive embed-responsive-16by9">
-                    <video style={{maxWidth:"100%"}} id="episode" controls="controls" autoplay="autoplay" controlslist="nodownload" src={episodeLink} ></video>
+                <div className="embed-responsive embed-responsive-16by9">
+                    <video style={{maxWidth:"100%"}} id="episode" controls="controls" autoPlay controlsList="nodownload" src={episodeLink} ></video>
                 </div>
             }
         </Container>
