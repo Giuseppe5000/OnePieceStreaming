@@ -1,6 +1,6 @@
 import NavbarJsx from './components/Navbar';
 import Episode from './components/Episode';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
@@ -14,6 +14,8 @@ const App = () => {
   const [episodeNum, setEpisodeNum] = useState();
   const [showEpisode, setShowEpisode] = useState(false);
 
+  const containerList = useRef();
+
   const loadEpisodeNum = async () => {
     let response = await fetch(`https://one-piece-streaming-backend.vercel.app/api/episodeNumber`);
     let data = await response.json();
@@ -25,7 +27,7 @@ const App = () => {
     for (let i = 1; i <= episodeNum; i++) {
       content.push(
         <Col key={i} className="my-4">
-          <Button  variant="dark" onClick={() => setShowEpisode(i)}> {i} </Button>
+          <Button variant="dark" onClick={() => setShowEpisode(i)}> {i} </Button>
         </Col>
       );
     }
@@ -39,18 +41,29 @@ const App = () => {
   return (
     <>
       <NavbarJsx setShowEpisode={setShowEpisode}></NavbarJsx>
+
+
+
       {!showEpisode &&
         <>
-          <Image src={image} fluid/>
+          <Image src={image} fluid />
           <h1 className="text-center mt-5">Episode List</h1>
         </>
       }
       {!showEpisode &&
-        <Container className="text-center">
+        <Container className="text-center" >
           <Row className='mt-5'>
             {episodeNum && renderButtonLinks()}
           </Row>
+
+          <Button className="scrollButton" variant="dark"
+            onClick={() => {
+              containerList.current.scrollIntoView({ behavior: "smooth" });
+            }}
+          >▼</Button>
+          <span ref={containerList}></span>
         </Container>
+
       }
 
       {showEpisode &&
