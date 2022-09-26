@@ -2,6 +2,7 @@ import NavbarJsx from './components/Navbar';
 import Episode from './components/Episode';
 import ButtonLinks from './components/ButtonLinks';
 import { useEffect, useState, useRef } from "react";
+import { useCookies } from 'react-cookie';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
@@ -16,6 +17,8 @@ const App = () => {
 
   const [episodeNum, setEpisodeNum] = useState();
   const [showEpisode, setShowEpisode] = useState(false);
+  const [cookies] = useCookies(['episode']);
+
   const containerList = useRef();
 
   useEffect(() => {
@@ -32,7 +35,7 @@ const App = () => {
     let content = [];
     for (let i = 1; i <= (episodeNum / 100) + 1; i++) {
       content.push(
-        <Nav.Item>
+        <Nav.Item key={i}>
           <Nav.Link eventKey={i}>{i * 100 - 99}-{i * 100}</Nav.Link>
         </Nav.Item>
       );
@@ -44,8 +47,8 @@ const App = () => {
     let content = [];
     for (let i = 1; i <= (episodeNum / 100) + 1; i++) {
       content.push(
-        <Tab.Pane eventKey={i}>
-          <Col key={i} className="my-4">
+        <Tab.Pane key={i} eventKey={i}>
+          <Col className="my-4">
             <ButtonLinks num={i * 100} setShowEpisode={setShowEpisode} episodeNum={episodeNum}></ButtonLinks>
           </Col>
         </Tab.Pane>
@@ -66,10 +69,10 @@ const App = () => {
           <h1 className="text-center my-5">Episode List</h1>
 
           <Container className="text-center mb-5" >
-            <Tab.Container defaultActiveKey="1">
+            <Tab.Container defaultActiveKey={cookies.episode ? Math.ceil(cookies.episode/100) : 1}>
               <Row>
                 <Col sm={3}>
-                  <Nav variant="pills" menuVariant="dark" className="flex-column">
+                  <Nav variant="pills" menuvariant="dark" className="flex-column">
                     {rederNavItems()}
                   </Nav>
                 </Col>

@@ -1,10 +1,12 @@
 import React from 'react'
 import { useEffect, useState } from "react";
+import { useCookies } from 'react-cookie';
 import Container from 'react-bootstrap/Container';
 
 const Episode = (props) => {
 
     const [episodeLink, setEpisodeLink] = useState(false);
+    const [, setCookie] = useCookies(['episode']);
 
     const getEpisode = async (epNum) => {
         let response = await fetch(`https://one-piece-streaming-backend.vercel.app/api/episode/${epNum}`);
@@ -14,6 +16,7 @@ const Episode = (props) => {
 
     useEffect(() => {
         getEpisode(props.epNum);
+        setCookie('episode', props.epNum, { path: '/' });
     })
 
     return (
@@ -21,7 +24,7 @@ const Episode = (props) => {
             <h1 className="text-center mb-5 mt-3">Episode {props.epNum}</h1>
             {episodeLink &&
                 <div className="embed-responsive embed-responsive-16by9">
-                    <video style={{maxWidth:"100%"}} id="episode" controls="controls" autoPlay controlsList="nodownload" src={episodeLink} ></video>
+                    <video style={{ maxWidth: "100%" }} id="episode" controls="controls" autoPlay controlsList="nodownload" src={episodeLink} ></video>
                 </div>
             }
         </Container>
