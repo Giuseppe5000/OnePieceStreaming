@@ -17,6 +17,7 @@ const Episode = (props) => {
     useEffect(() => {
         getEpisode(props.epNum);
         
+        const current = new Date();
         const nextYear = new Date();
         nextYear.setFullYear(current.getFullYear() + 1);
         setCookie('episode', props.epNum, { path: '/', expires: nextYear});
